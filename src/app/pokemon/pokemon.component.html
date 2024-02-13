@@ -1,0 +1,31 @@
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Buscar Pokémon por nombre" [(ngModel)]="filtroNombre" (ngModelChange)="filterPokemon()">
+  </div>
+  
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">First</th>
+      </tr>
+    </thead>
+    <tbody>
+      <div class="text-center" *ngIf="infoPokemon">
+        <td>{{ infoPokemon.id }}</td>
+        <td>{{ infoPokemon.base_experience }}</td>
+        <td>{{ infoPokemon.name }}</td>
+        <td>{{ infoPokemon.weight }}</td>
+      </div>
+      <ng-container *ngIf="!filteredPokemon.length">
+        <tr>
+          <td colspan="2" class="text-center">No se encontraron Pokémon</td>
+        </tr>
+      </ng-container>
+      <tr *ngFor="let pk of filteredPokemon; index as i">
+        <th scope="row">{{ i }}</th>
+        <td>{{ pk.name }}</td>
+        <button title="Detalle info." (click)="showDetailInfoPokemon(pk.name)">Detalle</button>
+      </tr>
+    </tbody>
+  </table>
+  
